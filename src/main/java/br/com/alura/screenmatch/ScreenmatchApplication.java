@@ -22,19 +22,19 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		var consumoApi = new ConsumoApi();
-		var json = consumoApi.obeterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=8ad43c66");
+		var json = consumoApi.obterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=8ad43c66");
 		System.out.println(json);
 		ConverteDados conversor = new ConverteDados();
 		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
 		System.out.println(dados);
-		json = consumoApi.obeterDados("https://omdbapi.com/?t=gilmore+girls&season=1&episode=2&apikey=8ad43c66");
+		json = consumoApi.obterDados("https://omdbapi.com/?t=gilmore+girls&season=1&episode=2&apikey=8ad43c66");
 		DadosEpisodio dadosEpisodio = conversor.obterDados(json, DadosEpisodio.class);
 		System.out.println(dadosEpisodio);
 
 		List<DadosTemporada> temporadas =  new ArrayList<>();
 
 		for (int i = 1; i < dados.totalTemporadas(); i++){
-			json = consumoApi.obeterDados("https://omdbapi.com/?t=gilmore+girls&season=" + i + "&apikey=8ad43c66");
+			json = consumoApi.obterDados("https://omdbapi.com/?t=gilmore+girls&season=" + i + "&apikey=8ad43c66");
 			DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
 			temporadas.add(dadosTemporada);
 		}
